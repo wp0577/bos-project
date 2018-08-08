@@ -7,7 +7,8 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 public class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
-    private T model;
+    //使用protected是为了让子类也能得到model对象
+    protected T model;
 
     //在构造方法中动态获取实体类型，通过反射创建model对象
     public BaseAction() {
