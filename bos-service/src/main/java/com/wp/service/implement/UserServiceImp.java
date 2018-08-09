@@ -20,4 +20,10 @@ public class UserServiceImp implements IUserService<User>{
         User user = userDao.getUserByNameAndPassword(username, password);
         return user;
     }
+
+    @Override
+    public void editPassword(String id, String password) {
+        password = MD5Utils.md5(password);
+        userDao.executeUpdate("user.editPassword", password, id);
+    }
 }

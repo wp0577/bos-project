@@ -86,8 +86,31 @@
 		});
 		
 		$("#btnEp").click(function(){
-			alert("修改密码");
+            var e = $("#passwordForm").form("validate");
+           // var password = ${"#txtRePass"}.val();
+            if(e) {
+                $.post("${pageContext.request.contextPath}/userAction_editPassword", { "password": $("#txtRePass").val() },
+                    function(data){
+                        if(data == 1) {
+                            $('#editPwdWindow').window('close');
+                        }
+                        else {
+                            $.messager.alert("warning","edit password failed","warning")
+                        }
+                })
+            }
 		});
+
+		/*检查密码是否相等*/
+        $.extend($.fn.validatebox.defaults.rules, {
+            equals: {
+                validator: function(value,param){
+                    return value == $(param[0]).val();
+                },
+                message: 'Field do not match.'
+            }
+        });
+
 	});
 
 	function onClick(event, treeId, treeNode, clickFlag) {
@@ -227,24 +250,26 @@
     <div id="editPwdWindow" class="easyui-window" title="修改密码" collapsible="false" minimizable="false" modal="true" closed="true" resizable="false"
         maximizable="false" icon="icon-save"  style="width: 300px; height: 160px; padding: 5px;
         background: #fafafa">
-        <div class="easyui-layout" fit="true">
-            <div region="center" border="false" style="padding: 10px; background: #fff; border: 1px solid #ccc;">
-                <table cellpadding=3>
-                    <tr>
-                        <td>新密码：</td>
-                        <td><input id="txtNewPass" type="Password" class="txt01" /></td>
-                    </tr>
-                    <tr>
-                        <td>确认密码：</td>
-                        <td><input id="txtRePass" type="Password" class="txt01" /></td>
-                    </tr>
-                </table>
+            <div class="easyui-layout" fit="true">
+                <form action="" id="passwordForm">
+                <div region="center" border="false" style="padding: 10px; background: #fff; border: 1px solid #ccc;">
+                    <table cellpadding=3>
+                        <tr>
+                            <td>新密码：</td>
+                            <td><input id="txtNewPass" data-options="required:true,validType:'length[4,7]'" type="Password" class="txt01 easyui-validatebox" /></td>
+                        </tr>
+                        <tr>
+                            <td>确认密码：</td>
+                            <td><input id="txtRePass" validType="equals['#txtNewPass']" data-options="required:true,validType:'length[4,7]'" type="Password" class="txt01 easyui-validatebox" /></td>
+                        </tr>
+                    </table>
+                </div>
+                <div region="south" border="false" style="text-align: right; height: 30px; line-height: 30px;">
+                    <a id="btnEp" class="easyui-linkbutton" icon="icon-ok" href="javascript:void(0)" >确定</a>
+                    <a id="btnCancel" class="easyui-linkbutton" icon="icon-cancel" href="javascript:void(0)">取消</a>
+                </div>
+                </form>
             </div>
-            <div region="south" border="false" style="text-align: right; height: 30px; line-height: 30px;">
-                <a id="btnEp" class="easyui-linkbutton" icon="icon-ok" href="javascript:void(0)" >确定</a> 
-                <a id="btnCancel" class="easyui-linkbutton" icon="icon-cancel" href="javascript:void(0)">取消</a>
-            </div>
-        </div>
     </div>
 </body>
 </html>

@@ -1,6 +1,8 @@
 package com.wp.dao.imp;
 
 import com.wp.dao.IBaseDao;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
@@ -49,5 +51,16 @@ public class IBaseDaoImp<T> extends HibernateDaoSupport implements IBaseDao<T>  
     @Override
     public T getById(Serializable id) {
         return (T) getHibernateTemplate().get(entityClass, id);
+    }
+
+    @Override
+    public void executeUpdate(String sql, Object... objects) {
+        Session session = getSessionFactory().getCurrentSession();
+        Query query = session.getNamedQuery(sql);
+        int i = 0;
+        for (Object o : objects) {
+            query.setParameter(i++, o);
+        }
+        query.executeUpdate();
     }
 }

@@ -9,4 +9,7 @@ public interface IBaseDao<T> {
     public void delete(T t);
     public List<T> getAll();
     public T getById(Serializable id);
+
+    //一定要三个点
+    void executeUpdate(String s, Object... objects);
 }
