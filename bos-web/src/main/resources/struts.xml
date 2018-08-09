@@ -6,10 +6,27 @@
 
 <struts>
     <constant name="struts.devMode" value="true" />
+
     <!--
         <constant name="struts.objectFactory" value="spring"/>
      -->
     <package name="basicstruts2" extends="struts-default">
+        <!--注册登陆校验拦截器，并且拦截器要放在package最上端-->
+        <interceptors>
+            <interceptor name="loginInterceptor" class="com.wp.web.interceptor.LoginInterceptor">
+                <param name="excludeMethods">login</param>
+            </interceptor>
+            <interceptor-stack name="myStack">
+                <interceptor-ref name="loginInterceptor"></interceptor-ref>
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="myStack"></default-interceptor-ref>
+
+        <!--设置全局result变量，这样不止action返回的结果会被查询，其他类返回的也会-->
+        <global-results>
+            <result name="login">login.jsp</result>
+        </global-results>
         <!-- 需要进行权限控制的页面访问, 即为了方便web-info下面的页面跳转-->
         <action name="page_*_*">
             <result type="dispatcher">/WEB-INF/pages/{1}/{2}.jsp</result>
@@ -19,7 +36,6 @@
                 <param name="actionName">page_common_index</param>
                 <param name="namespace">/</param>
             </result>
-            <result name="login">login.jsp</result>
         </action>
     </package>
 </struts>

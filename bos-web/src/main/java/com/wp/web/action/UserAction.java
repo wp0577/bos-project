@@ -35,6 +35,11 @@ public class UserAction extends BaseAction<User> {
         }
     }
 
+    public String logout() {
+        ServletActionContext.getRequest().getSession().invalidate();
+        return LOGIN;
+    }
+
     public void setCheckcode(String checkcode) {
         this.checkcode = checkcode;
     }
