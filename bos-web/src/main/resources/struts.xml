@@ -37,5 +37,8 @@
                 <param name="namespace">/</param>
             </result>
         </action>
+        <action name="staffAction_*" class="staffAction" method="{1}">
+            <result name="list"></result>
+        </action>
     </package>
 </struts>

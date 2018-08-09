@@ -16,7 +16,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/js/easyui/ext/portal.css">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath }/css/default.css">	
+	href="${pageContext.request.contextPath }/css/default.css">
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript"
@@ -31,21 +31,21 @@
 		//alert("增加...");
 		$('#addStaffWindow').window("open");
 	}
-	
+
 	function doView(){
 		alert("查看...");
 	}
-	
+
 	function doDelete(){
 		alert("删除...");
 	}
-	
+
 	function doRestore(){
 		alert("将取派员还原...");
 	}
 	//工具栏
 	var toolbar = [ {
-		id : 'button-view',	
+		id : 'button-view',
 		text : '查询',
 		iconCls : 'icon-search',
 		handler : doView
@@ -114,11 +114,11 @@
 		width : 200,
 		align : 'center'
 	} ] ];
-	
+
 	$(function(){
 		// 先将body隐藏，再显示，不会出现页面刷新效果
 		$("body").css({visibility:"visible"});
-		
+
 		// 取派员信息表格
 		$('#grid').datagrid( {
 			iconCls : 'icon-forward',
@@ -134,7 +134,7 @@
 			columns : columns,
 			onDblClickRow : doDblClickRow
 		});
-		
+
 		// 添加取派员窗口
 		$('#addStaffWindow').window({
 	        title: '添加取派员',
@@ -145,13 +145,13 @@
 	        height: 400,
 	        resizable:false
 	    });
-		
+
 	});
 
 	function doDblClickRow(rowIndex, rowData){
 		alert("双击表格数据...");
 	}
-</script>	
+</script>
 </head>
 <body class="easyui-layout" style="visibility:hidden;">
 	<div region="center" border="false">
@@ -163,25 +163,44 @@
 				<a id="save" icon="icon-save" href="#" class="easyui-linkbutton" plain="true" >保存</a>
 			</div>
 		</div>
-		
+
 		<div region="center" style="overflow:auto;padding:5px;" border="false">
-			<form>
+			<form id="staffAddForm" action="staffAction_save" method="post">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">收派员信息</td>
 					</tr>
 					<!-- TODO 这里完善收派员添加 table -->
 					<tr>
-						<td>取派员编号</td>
-						<td><input type="text" name="id" class="easyui-validatebox" required="true"/></td>
-					</tr>
-					<tr>
 						<td>姓名</td>
 						<td><input type="text" name="name" class="easyui-validatebox" required="true"/></td>
 					</tr>
 					<tr>
 						<td>手机</td>
-						<td><input type="text" name="telephone" class="easyui-validatebox" required="true"/></td>
+						<%--为手机添加校验规则,必须为10位--%>
+						<script type="text/javascript">
+                            $(function () {
+                                $('#save').click(function () {
+                                    var e = $('#staffAddForm').form("validate");
+                                    if(e){
+                                        /*$('#staffAddForm').form("submit");
+                                        * 使用上述方法会跳用ajax请求，页面不会刷新*/
+                                        $('#staffAddForm').submit();
+                                    }
+                                });
+
+                                $.extend($.fn.validatebox.defaults.rules, {
+                                    telephone: {
+                                        validator: function(value,param){
+                                            return value.match(/\d/g).length===10;
+                                        },
+                                        message: 'password formate is wrong.'
+                                    }
+                                });
+                            })
+						</script>
+						<td><input type="text" name="telephone" data-options="validType:'telephone'"
+								   class="easyui-validatebox" required="true"/></td>
 					</tr>
 					<tr>
 						<td>单位</td>
@@ -195,7 +214,7 @@
 					<tr>
 						<td>取派标准</td>
 						<td>
-							<input type="text" name="standard" class="easyui-validatebox" required="true"/>  
+							<input type="text" name="standard" class="easyui-validatebox" required="true"/>
 						</td>
 					</tr>
 					</table>
@@ -203,4 +222,4 @@
 		</div>
 	</div>
 </body>
-</html>	
+</html>

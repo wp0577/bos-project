@@ -6,8 +6,10 @@ import com.wp.service.IUserService;
 import com.wp.utils.MD5加密.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class UserServiceImp implements IUserService<User>{
 
     @Autowired
