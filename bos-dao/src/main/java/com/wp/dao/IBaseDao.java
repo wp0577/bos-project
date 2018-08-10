@@ -1,5 +1,7 @@
 package com.wp.dao;
 
+import com.wp.utils.MD5加密.PageBean;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -12,4 +14,6 @@ public interface IBaseDao<T> {
 
     //一定要三个点
     void executeUpdate(String s, Object... objects);
+
+    void getPage(PageBean pageBean);
 }

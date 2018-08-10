@@ -3,6 +3,7 @@ package com.wp.service.implement;
 import com.wp.dao.IStaffDao;
 import com.wp.domain.Staff;
 import com.wp.service.IStaffService;
+import com.wp.utils.MD5加密.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,5 +18,18 @@ public class StaffServiceImp implements IStaffService<Staff> {
     @Override
     public void save(Staff model) {
         iStaffDao.save(model);
+    }
+
+    @Override
+    public void deleteByID(String id) {
+        String[] split = id.split(",");
+        for (String ids:split) {
+            iStaffDao.executeUpdate("staff.delete", ids);
+        }
+    }
+
+    @Override
+    public void getPage(PageBean pageBean) {
+        iStaffDao.getPage(pageBean);
     }
 }

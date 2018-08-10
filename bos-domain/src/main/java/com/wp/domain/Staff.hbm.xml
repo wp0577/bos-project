@@ -32,4 +32,7 @@
             <one-to-many class="com.wp.domain.Decidedzone" />
         </set>
     </class>
+    <query name="staff.delete">
+        update Staff set deltag = '1' where id = ?
+    </query>
 </hibernate-mapping>

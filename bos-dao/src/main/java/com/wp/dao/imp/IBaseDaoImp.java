@@ -1,9 +1,13 @@
 package com.wp.dao.imp;
 
 import com.wp.dao.IBaseDao;
+import com.wp.utils.MD5加密.PageBean;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import javax.annotation.Resource;
@@ -62,5 +66,23 @@ public class IBaseDaoImp<T> extends HibernateDaoSupport implements IBaseDao<T>  
             query.setParameter(i++, o);
         }
         query.executeUpdate();
+    }
+
+    @Override
+    public void getPage(PageBean pageBean) {
+        //得到pagebean，通过pagebean的currentpage，和pageSize查询数据
+        //先查询总数据数量，用到聚合
+        DetachedCriteria detachedCriteria = pageBean.getDetachedCriteria();
+        detachedCriteria.setProjection(Projections.rowCount());
+        List<Long> byCriteria = (List<Long>) getHibernateTemplate().findByCriteria(detachedCriteria);
+        int total = byCriteria.get(0).intValue();
+        //清空聚合
+        detachedCriteria.setProjection(null);
+        //查询分页所需列表
+        int maxResult = pageBean.getPageSize();
+        int firstResult = (pageBean.getCurrentPage() - 1) * pageBean.getPageSize();
+        List criteria = getHibernateTemplate().findByCriteria(detachedCriteria, firstResult, maxResult);
+        pageBean.setRows(criteria);
+        pageBean.setTotal(total);
     }
 }

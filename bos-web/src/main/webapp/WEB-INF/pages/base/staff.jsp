@@ -37,7 +37,21 @@
 	}
 
 	function doDelete(){
-		alert("删除...");
+		var row = $("#grid").datagrid("getSelections");
+		if(row.length == 0) {
+		    $.messager.alert("warning information", "you should select one row", "warning");
+		}
+		else {
+            $.messager.confirm('Confirm', 'Are you sure to delete selected staff?',
+				function(r){if (r){ var array = new Array();
+                    for(var i = 0; i < row.length; i++) {
+                        var v = row[i];
+                        array.push(v.id);
+                    }
+                    var e = array.join(",");
+                    location.href = "${pageContext.request.contextPath}/staffAction_deleteById?ids=" + e; } });
+
+		}
 	}
 
 	function doRestore(){
@@ -71,46 +85,46 @@
 		checkbox : true,
 	},{
 		field : 'name',
-		title : '姓名',
+		title : 'name',
 		width : 120,
 		align : 'center'
 	}, {
 		field : 'telephone',
-		title : '手机号',
+		title : 'telephone',
 		width : 120,
 		align : 'center'
 	}, {
 		field : 'haspda',
-		title : '是否有PDA',
+		title : 'PDA',
 		width : 120,
 		align : 'center',
 		formatter : function(data,row, index){
 			if(data=="1"){
-				return "有";
+				return "yes";
 			}else{
-				return "无";
+				return "no";
 			}
 		}
 	}, {
 		field : 'deltag',
-		title : '是否作废',
+		title : 'valid',
 		width : 120,
 		align : 'center',
 		formatter : function(data,row, index){
 			if(data=="0"){
-				return "正常使用"
+				return "valid"
 			}else{
-				return "已作废";
+				return "invalid";
 			}
 		}
 	}, {
 		field : 'standard',
-		title : '取派标准',
+		title : 'standard',
 		width : 120,
 		align : 'center'
 	}, {
 		field : 'station',
-		title : '所谓单位',
+		title : 'station',
 		width : 200,
 		align : 'center'
 	} ] ];
@@ -126,10 +140,10 @@
 			border : false,
 			rownumbers : true,
 			striped : true,
-			pageList: [30,50,100],
+			pageList: [5,10,15,20,30,50,100],
 			pagination : true,
 			toolbar : toolbar,
-			url : "json/staff.json",
+			url : "${pageContext.request.contextPath}/staffAction_list",
 			idField : 'id',
 			columns : columns,
 			onDblClickRow : doDblClickRow
@@ -137,7 +151,7 @@
 
 		// 添加取派员窗口
 		$('#addStaffWindow').window({
-	        title: '添加取派员',
+	        title: 'add staff',
 	        width: 400,
 	        modal: true,
 	        shadow: true,
@@ -178,6 +192,7 @@
 					<tr>
 						<td>手机</td>
 						<%--为手机添加校验规则,必须为10位--%>
+						<td>
 						<script type="text/javascript">
                             $(function () {
                                 $('#save').click(function () {
@@ -188,6 +203,11 @@
                                         $('#staffAddForm').submit();
                                     }
                                 });
+								/*父类的click方法重写了子类checkbox的的click方法*/
+                               /* var check=document.getElementById("haspda");
+                                check.onclick=function(){
+                                    return true;
+                                }*/
 
                                 $.extend($.fn.validatebox.defaults.rules, {
                                     telephone: {
@@ -199,7 +219,7 @@
                                 });
                             })
 						</script>
-						<td><input type="text" name="telephone" data-options="validType:'telephone'"
+						<input type="text" name="telephone" data-options="validType:'telephone'"
 								   class="easyui-validatebox" required="true"/></td>
 					</tr>
 					<tr>
@@ -208,7 +228,7 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-						<input type="checkbox" name="haspda" value="1" />
+						<input  type="checkbox" name="haspda" value="1"  />
 						是否有PDA</td>
 					</tr>
 					<tr>
