@@ -9,4 +9,6 @@ public interface IStaffService<Staff> {
     void getPage(PageBean pageBean);
 
     void deleteByID(String id);
+
+    Staff getById(String id);
 }

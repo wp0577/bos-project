@@ -32,4 +32,9 @@ public class StaffServiceImp implements IStaffService<Staff> {
     public void getPage(PageBean pageBean) {
         iStaffDao.getPage(pageBean);
     }
+
+    @Override
+    public Staff getById(String id) {
+        return iStaffDao.getById(id);
+    }
 }
