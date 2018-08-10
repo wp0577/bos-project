@@ -2,8 +2,10 @@ package com.wp.web.action;
 
 import com.wp.domain.Region;
 import com.wp.service.IRegionService;
+import com.wp.utils.MD5加密.PageBean;
 import com.wp.utils.MD5加密.PinYin4jUtils;
 import com.wp.web.action.base.BaseAction;
+import org.apache.commons.collections.functors.NonePredicate;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -27,6 +29,12 @@ public class RegionAction extends BaseAction<Region> {
     private IRegionService iRegionService;
 
     private File myFile;
+
+    public String list() {
+        iRegionService.getPage(pageBean);
+        this.String2Json(pageBean, new String[]{"currentPage","detachedCriteria","pageSize"});
+        return NONE;
+    }
 
     public String upload() throws Exception {
         HSSFWorkbook hssfWorkbook = new HSSFWorkbook(new FileInputStream(myFile));

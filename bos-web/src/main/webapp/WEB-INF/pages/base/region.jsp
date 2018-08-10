@@ -67,32 +67,32 @@
 		checkbox : true,
 	},{
 		field : 'province',
-		title : '省',
+		title : 'province',
 		width : 120,
 		align : 'center'
 	}, {
 		field : 'city',
-		title : '市',
+		title : 'city',
 		width : 120,
 		align : 'center'
 	}, {
 		field : 'district',
-		title : '区',
+		title : 'district',
 		width : 120,
 		align : 'center'
 	}, {
 		field : 'postcode',
-		title : '邮编',
+		title : 'postcode',
 		width : 120,
 		align : 'center'
 	}, {
 		field : 'shortcode',
-		title : '简码',
+		title : 'shortcode',
 		width : 120,
 		align : 'center'
 	}, {
 		field : 'citycode',
-		title : '城市编码',
+		title : 'citycode',
 		width : 200,
 		align : 'center'
 	} ] ];
@@ -108,10 +108,10 @@
 			border : false,
 			rownumbers : true,
 			striped : true,
-			pageList: [30,50,100],
+			pageList: [10,20,30,50,100],
 			pagination : true,
 			toolbar : toolbar,
-			url : "json/region.json",
+			url : "regionAction_list",
 			idField : 'id',
 			columns : columns,
 			onDblClickRow : doDblClickRow
