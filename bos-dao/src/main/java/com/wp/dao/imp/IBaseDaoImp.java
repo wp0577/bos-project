@@ -1,6 +1,7 @@
 package com.wp.dao.imp;
 
 import com.wp.dao.IBaseDao;
+import com.wp.domain.Region;
 import com.wp.utils.MD5加密.PageBean;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -15,6 +16,8 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
+
+import static com.sun.tools.doclint.Entity.ge;
 
 public class IBaseDaoImp<T> extends HibernateDaoSupport implements IBaseDao<T>  {
 
@@ -84,5 +87,10 @@ public class IBaseDaoImp<T> extends HibernateDaoSupport implements IBaseDao<T>  
         List criteria = getHibernateTemplate().findByCriteria(detachedCriteria, firstResult, maxResult);
         pageBean.setRows(criteria);
         pageBean.setTotal(total);
+    }
+
+    @Override
+    public void saveOrUpdate(T t) {
+        getHibernateTemplate().saveOrUpdate(t);
     }
 }

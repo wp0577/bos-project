@@ -1,5 +1,6 @@
 package com.wp.dao;
 
+import com.wp.domain.Region;
 import com.wp.utils.MD5加密.PageBean;
 
 import java.io.Serializable;
@@ -16,4 +17,6 @@ public interface IBaseDao<T> {
     void executeUpdate(String s, Object... objects);
 
     void getPage(PageBean pageBean);
+
+    void saveOrUpdate(T t);
 }

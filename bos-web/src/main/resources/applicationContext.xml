@@ -19,7 +19,7 @@
 	<!-- 配置数据源 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="${jdbc.driverClass}"/>
-		<property name="jdbcUrl" value="${jdbc.jdbcUrl}"/>
+		<property name="jdbcUrl" value="${jdbc.jdbcUrl}?useUnicode=true&amp;characterEncoding=utf-8"/>
 		<property name="user" value="${jdbc.user}"/>
 		<property name="password" value="${jdbc.password}"/>
 	</bean>
