@@ -17,6 +17,10 @@ public class Subarea implements java.io.Serializable {
 	private String single;
 	private String position;
 
+	//通过getSubareaid方法让前端从subarea对象中得到subareasis属性
+	public String getSubareasid() {
+		return this.id;
+	}
 	// Constructors
 
 	/** default constructor */

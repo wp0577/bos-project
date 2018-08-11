@@ -94,6 +94,11 @@ public class IBaseDaoImp<T> extends HibernateDaoSupport implements IBaseDao<T>  
     }
 
     @Override
+    public List<T> getByCriterial(DetachedCriteria detachedCriteria) {
+        return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria);
+    }
+
+    @Override
     public void saveOrUpdate(T t) {
         getHibernateTemplate().saveOrUpdate(t);
     }

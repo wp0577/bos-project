@@ -1,7 +1,9 @@
 package com.wp.dao;
 
 import com.wp.domain.Region;
+import com.wp.domain.Staff;
 import com.wp.utils.MD5加密.PageBean;
+import org.hibernate.criterion.DetachedCriteria;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,4 +21,6 @@ public interface IBaseDao<T> {
     void getPage(PageBean pageBean);
 
     void saveOrUpdate(T t);
+    //通过特定条件获得数据
+    List<T> getByCriterial(DetachedCriteria detachedCriteria);
 }

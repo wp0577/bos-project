@@ -44,7 +44,7 @@
 	}
 	
 	function doExport(){
-		alert("导出");
+		location.href = "subAreaAction_exportFile"
 	}
 	
 	function doImport(){

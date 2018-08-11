@@ -7,12 +7,14 @@
             <column name="id" length="32" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="staff" class="com.wp.domain.Staff" fetch="select">
+        <many-to-one lazy="false" name="staff" class="com.wp.domain.Staff" fetch="select">
             <column name="staff_id" length="32" />
         </many-to-one>
         <property name="name" type="java.lang.String">
             <column name="name" length="30" />
         </property>
+        <!--这里inverse为true的意思是该表格放弃维护另一方管理的表格，即一对多的一方放弃维护，这样就不能在一的一方添加多的对象
+        只能通过多的去维护-->
         <set name="subareas" inverse="true">
             <key>
                 <column name="decidedzone_id" length="32" />
