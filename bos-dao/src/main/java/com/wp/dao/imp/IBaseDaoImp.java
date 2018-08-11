@@ -51,8 +51,10 @@ public class IBaseDaoImp<T> extends HibernateDaoSupport implements IBaseDao<T>  
 
     @Override
     public List<T> getAll() {
-        String hql = "from" + entityClass.getSimpleName();;
-        return (List<T>) getHibernateTemplate().find(hql);
+        //此处from后面一定要加空格 不然会粘合在一起
+        String hql = "from " + entityClass.getSimpleName();;
+        List<T> list = (List<T>) getHibernateTemplate().find(hql);
+        return list;
     }
 
     @Override

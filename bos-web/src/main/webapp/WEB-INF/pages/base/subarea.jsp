@@ -206,41 +206,47 @@
 	<div class="easyui-window" title="分区添加修改" id="addSubareaWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
 		<div style="height:31px;overflow:hidden;" split="false" border="false" >
 			<div class="datagrid-toolbar">
-				<a id="save" icon="icon-save" href="#" class="easyui-linkbutton" plain="true" >保存</a>
+				<a id="save" icon="icon-save" href="#" class="easyui-linkbutton" plain="true" >save</a>
+				<script type="text/javascript">
+					$(function () {
+						$('#save').click(function () {
+							var e = $('#saveSubareaForm').form("validate");
+							if(e) {
+                                $('#saveSubareaForm').submit();
+							}
+                        })
+                    })
+				</script>
 			</div>
 		</div>
 		
 		<div style="overflow:auto;padding:5px;" border="false">
-			<form>
+			<form id="saveSubareaForm" method="post" action="subAreaAction_save">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
-						<td colspan="2">分区信息</td>
+						<td colspan="2">Subarea Information</td>
 					</tr>
 					<tr>
-						<td>分拣编码</td>
-						<td><input type="text" name="id" class="easyui-validatebox" required="true"/></td>
-					</tr>
-					<tr>
-						<td>选择区域</td>
+						<td>Select District</td>
 						<td>
 							<input class="easyui-combobox" name="region.id"  
-    							data-options="valueField:'id',textField:'name',url:'json/standard.json'" />  
+    							data-options="valueField:'id',textField:'name',url:'regionAction_listAjax', mode:'remote'" />
 						</td>
 					</tr>
 					<tr>
-						<td>关键字</td>
+						<td>Keyword</td>
 						<td><input type="text" name="addresskey" class="easyui-validatebox" required="true"/></td>
 					</tr>
 					<tr>
-						<td>起始号</td>
+						<td>Start Number</td>
 						<td><input type="text" name="startnum" class="easyui-validatebox" required="true"/></td>
 					</tr>
 					<tr>
-						<td>终止号</td>
+						<td>End Number</td>
 						<td><input type="text" name="endnum" class="easyui-validatebox" required="true"/></td>
 					</tr>
 					<tr>
-						<td>单双号</td>
+						<td>Single</td>
 						<td>
 							<select class="easyui-combobox" name="single" style="width:150px;">  
 							    <option value="0">单双号</option>  
@@ -250,7 +256,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td>位置信息</td>
+						<td>Position</td>
 						<td><input type="text" name="position" class="easyui-validatebox" required="true" style="width:250px;"/></td>
 					</tr>
 				</table>

@@ -20,6 +20,13 @@ public class Region implements java.io.Serializable {
 	private String citycode;
 	private Set subareas = new HashSet(0);
 
+
+
+	//可以直接通过getName方法来让string2Json将region对象转成带name属性的json数据
+	public String getName() {
+		return province + " " +city + " " + district;
+	}
+
 	// Constructors
 
 	/** default constructor */

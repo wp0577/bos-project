@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -23,6 +24,16 @@ public class IRegionServiceImpl implements IRegionService {
             iRegionDao.saveOrUpdate(region);
         }
 
+    }
+
+    @Override
+    public List<Region> getAll() {
+        return  iRegionDao.getAll();
+    }
+
+    @Override
+    public List<Region> getByQ(String q) {
+        return iRegionDao.getByQ(q);
     }
 
     @Override

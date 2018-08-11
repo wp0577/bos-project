@@ -3,6 +3,7 @@ package com.wp.web.action.base;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.wp.utils.MD5加密.PageBean;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import org.apache.struts2.ServletActionContext;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.nio.charset.CharsetEncoder;
+import java.util.List;
 
 public class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
     //使用protected是为了让子类也能得到model对象
@@ -47,6 +49,18 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
         //new String[]{"currentPage","detachedCriteria","pageSize"}
         jsonConfig.setExcludes(excludes);
         String jsonObject = JSONObject.fromObject(o,jsonConfig).toString();
+        ServletActionContext.getResponse().setContentType("text/json;charset=utf-8");
+        try {
+            ServletActionContext.getResponse().getWriter().write(jsonObject);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void String2Json(List list, String[] excludes) {
+        JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.setExcludes(excludes);
+        String jsonObject = JSONArray.fromObject(list,jsonConfig).toString();
         ServletActionContext.getResponse().setContentType("text/json;charset=utf-8");
         try {
             ServletActionContext.getResponse().getWriter().write(jsonObject);

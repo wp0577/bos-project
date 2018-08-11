@@ -20,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @Scope("prototype")
@@ -30,9 +31,23 @@ public class RegionAction extends BaseAction<Region> {
 
     private File myFile;
 
+    private String q;
+
     public String list() {
         iRegionService.getPage(pageBean);
-        this.String2Json(pageBean, new String[]{"currentPage","detachedCriteria","pageSize"});
+        this.String2Json(pageBean, new String[]{"currentPage","detachedCriteria","pageSize","subareas"});
+        return NONE;
+    }
+
+    public String listAjax() {
+        List<Region> regions = null;
+        if(StringUtils.isNotBlank(q)) {
+            regions = iRegionService.getByQ(q);
+        }
+        else {
+            regions = iRegionService.getAll();
+        }
+        this.String2Json(regions, new String[]{"subareas"});
         return NONE;
     }
 
@@ -66,6 +81,10 @@ public class RegionAction extends BaseAction<Region> {
 
     public void setiRegionService(IRegionService iRegionService) {
         this.iRegionService = iRegionService;
+    }
+
+    public void setQ(String q) {
+        this.q = q;
     }
 
     public void setMyFile(File myFile) {
