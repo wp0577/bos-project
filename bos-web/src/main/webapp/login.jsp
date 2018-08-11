@@ -88,6 +88,7 @@ input[type=password] {
 							id="loginform:loginBtn" class="btn btn-login"
 							style="margin-top:-36px;">登录</span>
 						</a>
+						<input type="submit" style="opacity: 0">
 					</div>
 					<div align="center" style="padding-top: 5px">
 						<span style="color: red; "><s:actionerror></s:actionerror></span>

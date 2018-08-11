@@ -83,6 +83,8 @@ public class IBaseDaoImp<T> extends HibernateDaoSupport implements IBaseDao<T>  
         int total = byCriteria.get(0).intValue();
         //清空聚合
         detachedCriteria.setProjection(null);
+        //设置hibernate封装对象格式
+        detachedCriteria.setResultTransformer(DetachedCriteria.ROOT_ENTITY);
         //查询分页所需列表
         int maxResult = pageBean.getPageSize();
         int firstResult = (pageBean.getCurrentPage() - 1) * pageBean.getPageSize();
