@@ -30,6 +30,21 @@ public class DecidedzoneAction extends BaseAction<Decidedzone> {
     @Autowired
     private ICustomerService iCustomerService;
 
+    private String decidezone_id;
+
+    /**
+    * @Description:  double click decidedzone to appear subarea data
+    * @Param:  decidedzone_id
+    * @return:  put json data into response
+    * @Author: Pan wu
+    * @Date: 8/12/18
+    */
+    public String getSubareaByDecidedzone() {
+        List<Subarea> list = iDecidedzoneService.getSubareaByDecidedzone(decidezone_id);
+        this.String2Json(list, new String[]{"subareas", "decidedzone"});
+        return NONE;
+    }
+
     /*
     * access to cxf service and get customer data
     * */
@@ -104,5 +119,9 @@ public class DecidedzoneAction extends BaseAction<Decidedzone> {
 
     public void setCustomerIds(List<Integer> customerIds) {
         this.customerIds = customerIds;
+    }
+
+    public void setDecidezone_id(String decidezone_id) {
+        this.decidezone_id = decidezone_id;
     }
 }

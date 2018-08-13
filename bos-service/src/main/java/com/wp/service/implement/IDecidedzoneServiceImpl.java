@@ -6,9 +6,13 @@ import com.wp.domain.Decidedzone;
 import com.wp.domain.Subarea;
 import com.wp.service.IDecidedzoneService;
 import com.wp.utils.PageBean;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -22,6 +26,15 @@ public class IDecidedzoneServiceImpl implements IDecidedzoneService {
     @Override
     public void getPage(PageBean pageBean) {
         iDecidedzoneDao.getPage(pageBean);
+    }
+
+    @Override
+    public List<Subarea> getSubareaByDecidedzone(String decidezone_id) {
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Subarea.class);
+        //这里不能写decidedzone_id，在hibernate框架下，里面的查询应该用对象的角度出发
+        detachedCriteria.add(Restrictions.eq("decidedzone.id",decidezone_id));
+        List<Subarea> byCriterial = iSubareaDao.getByCriterial(detachedCriteria);
+        return byCriterial;
     }
 
     @Override

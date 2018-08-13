@@ -192,14 +192,14 @@
 		
 	});
 
-	function doDblClickRow(){
-		alert("双击表格数据...");
+	//双击事件可以绑定双击时的数据，index是几行，data是选择时的json数据
+	function doDblClickRow(index, data){
 		$('#association_subarea').datagrid( {
 			fit : true,
 			border : true,
 			rownumbers : true,
 			striped : true,
-			url : "json/association_subarea.json",
+			url : "decidedzoneAction_getSubareaByDecidedzone?decidezone_id="+data.id,
 			columns : [ [{
 				field : 'id',
 				title : '分拣编号',
@@ -261,7 +261,7 @@
 			border : true,
 			rownumbers : true,
 			striped : true,
-			url : "json/association_customer.json",
+			url : "decidedzoneAction_getAllHasAsso?id="+data.id,
 			columns : [[{
 				field : 'id',
 				title : '客户编号',
