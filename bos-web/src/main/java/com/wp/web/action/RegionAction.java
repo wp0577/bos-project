@@ -2,14 +2,11 @@ package com.wp.web.action;
 
 import com.wp.domain.Region;
 import com.wp.service.IRegionService;
-import com.wp.utils.MD5加密.PageBean;
-import com.wp.utils.MD5加密.PinYin4jUtils;
+import com.wp.utils.PinYin4jUtils;
 import com.wp.web.action.base.BaseAction;
-import org.apache.commons.collections.functors.NonePredicate;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -17,8 +14,6 @@ import org.springframework.stereotype.Controller;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 

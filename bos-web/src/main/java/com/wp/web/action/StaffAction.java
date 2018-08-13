@@ -2,12 +2,7 @@ package com.wp.web.action;
 
 import com.wp.domain.Staff;
 import com.wp.service.IStaffService;
-import com.wp.utils.MD5加密.PageBean;
 import com.wp.web.action.base.BaseAction;
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
-import org.apache.struts2.ServletActionContext;
-import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;

@@ -1,8 +1,6 @@
 package com.wp.dao;
 
-import com.wp.domain.Region;
-import com.wp.domain.Staff;
-import com.wp.utils.MD5加密.PageBean;
+import com.wp.utils.PageBean;
 import org.hibernate.criterion.DetachedCriteria;
 
 import java.io.Serializable;

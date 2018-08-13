@@ -2,7 +2,9 @@ package com.wp.web.action;
 
 import com.wp.domain.User;
 import com.wp.service.IUserService;
-import com.wp.utils.MD5加密.BosUtil;
+import com.wp.utils.BosUtil;
+import com.wp.utils.crm.Customer;
+import com.wp.utils.crm.ICustomerService;
 import com.wp.web.action.base.BaseAction;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +12,14 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @Scope("prototype")
 public class UserAction extends BaseAction<User> {
+
+    @Autowired
+    private ICustomerService iCustomerService;
 
     private String checkcode;
     @Autowired
@@ -39,6 +45,10 @@ public class UserAction extends BaseAction<User> {
     }
 
     public String login() throws Exception {
+        //test cxf service
+        /*List<Customer> all = iCustomerService.getAllHasAssociation("123");
+        System.out.println(all);*/
+
         //get correct checkcode from session
         String rightCheckcode = (String) ServletActionContext.getRequest().getSession().getAttribute("key");
         if(rightCheckcode.equals(checkcode)) {

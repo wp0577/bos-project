@@ -1,13 +1,11 @@
 package com.wp.dao.imp;
 
 import com.wp.dao.IBaseDao;
-import com.wp.domain.Region;
-import com.wp.utils.MD5加密.PageBean;
+import com.wp.utils.PageBean;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
@@ -16,8 +14,6 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
-
-import static com.sun.tools.doclint.Entity.ge;
 
 public class IBaseDaoImp<T> extends HibernateDaoSupport implements IBaseDao<T>  {
 

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CustomBeanRegistry">
+    <option name="map">
+      <map>
+        <entry key="&lt;jaxws:client xmlns:jaxws=&quot;http://cxf.apache.org/jaxws&quot; id=&quot;crmClient&quot; address=&quot;http://localhost:8080/service/customer&quot; serviceClass=&quot;com.wp.utils.crm.ICustomerService&quot; /&gt;">
+          <value>
+            <list>
+              <CustomBeanInfo>
+                <option name="beanName" value="crmClient.proxyFactory" />
+                <option name="beanClassName" value="org.apache.cxf.jaxws.JaxWsProxyFactoryBean" />
+              </CustomBeanInfo>
+              <CustomBeanInfo>
+                <option name="beanName" value="crmClient" />
+                <option name="beanClassName" value="org.apache.cxf.jaxws.spring.JaxWsProxyFactoryBeanDefinitionParser$JAXWSSpringClientProxyFactoryBean" />
+                <option name="idAttribute" value="id" />
+              </CustomBeanInfo>
+            </list>
+          </value>
+        </entry>
+        <entry key="&lt;jaxws:endpoint xmlns:jaxws=&quot;http://cxf.apache.org/jaxws&quot; id=&quot;helloWorld&quot; address=&quot;/HelloWorld&quot; implementor=&quot;com.wp.utils.crm.ICustomerService&quot; publish=&quot;true&quot; /&gt;">
+          <value>
+            <list>
+              <CustomBeanInfo>
+                <option name="beanName" value="helloWorld" />
+                <option name="beanClassName" value="org.apache.cxf.jaxws22.spring.JAXWS22SpringEndpointImpl" />
+                <option name="idAttribute" value="id" />
+                <option name="constructorArgumentCount" value="1" />
+              </CustomBeanInfo>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="policies">
+      <map>
+        <entry>
+          <key>
+            <MyQName>
+              <option name="namespace" value="http://cxf.apache.org/jaxws" />
+              <option name="localName" value="endpoint" />
+            </MyQName>
+          </key>
+          <value>
+            <CustomBeanInfo>
+              <option name="beanClassName" value="org.apache.cxf.jaxws22.spring.JAXWS22SpringEndpointImpl" />
+              <option name="idAttribute" value="id" />
+              <option name="constructorArgumentCount" value="1" />
+            </CustomBeanInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

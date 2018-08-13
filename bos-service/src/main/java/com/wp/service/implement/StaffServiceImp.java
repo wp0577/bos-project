@@ -3,7 +3,7 @@ package com.wp.service.implement;
 import com.wp.dao.IStaffDao;
 import com.wp.domain.Staff;
 import com.wp.service.IStaffService;
-import com.wp.utils.MD5加密.PageBean;
+import com.wp.utils.PageBean;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;

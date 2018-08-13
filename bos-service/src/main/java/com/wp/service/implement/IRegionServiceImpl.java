@@ -3,7 +3,7 @@ package com.wp.service.implement;
 import com.wp.dao.IRegionDao;
 import com.wp.domain.Region;
 import com.wp.service.IRegionService;
-import com.wp.utils.MD5加密.PageBean;
+import com.wp.utils.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

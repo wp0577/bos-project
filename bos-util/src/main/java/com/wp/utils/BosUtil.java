@@ -1,4 +1,4 @@
-package com.wp.utils.MD5加密;
+package com.wp.utils;
 
 import com.wp.domain.User;
 import org.apache.struts2.ServletActionContext;

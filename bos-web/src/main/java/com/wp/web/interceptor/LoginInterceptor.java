@@ -3,7 +3,7 @@ package com.wp.web.interceptor;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
 import com.wp.domain.User;
-import com.wp.utils.MD5加密.BosUtil;
+import com.wp.utils.BosUtil;
 
 public class LoginInterceptor extends MethodFilterInterceptor {
     @Override

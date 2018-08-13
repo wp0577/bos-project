@@ -1,7 +1,7 @@
 package com.wp.service;
 
 import com.wp.domain.Decidedzone;
-import com.wp.utils.MD5加密.PageBean;
+import com.wp.utils.PageBean;
 
 public interface IDecidedzoneService {
 

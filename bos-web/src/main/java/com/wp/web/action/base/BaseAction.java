@@ -2,7 +2,7 @@ package com.wp.web.action.base;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
-import com.wp.utils.MD5加密.PageBean;
+import com.wp.utils.PageBean;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
@@ -12,7 +12,6 @@ import org.hibernate.criterion.DetachedCriteria;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.nio.charset.CharsetEncoder;
 import java.util.List;
 
 public class BaseAction<T> extends ActionSupport implements ModelDriven<T>{

@@ -1,4 +1,4 @@
-package com.wp.utils.MD5加密;
+package com.wp.utils;
 
 import org.hibernate.criterion.DetachedCriteria;
 

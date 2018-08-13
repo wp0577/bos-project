@@ -44,7 +44,41 @@
 	}
 	
 	function doAssociations(){
-		$('#customerWindow').window('open');
+	    //先要确定是否有选择到一行定区
+		//业务要求只能同时给一条定区配置
+		var e = $("#grid").datagrid("getSelections");
+		if(e.length == 1) {
+			$('#customerWindow').window('open');
+			//因为每次打开customerWindow的时候，都会使用append方法添加数据，所以重新打开的时候应该清空一下。
+            $("#noassociationSelect").empty();
+            $("#associationSelect").empty();
+            $.post("decidedzoneAction_getAllNotAsso",{},function (data) {
+                for(var i = 0; i < data.length; i++) {
+                    //得到的data是含有customer的json数组
+                    var id = data[i].id;
+                    var name = data[i].name;
+                    var telephone = data[i].telephone;
+                    name = name+" (" + telephone + ")";
+                    $("#noassociationSelect").append("<option value="+id+">"+name+"</option>")
+                }
+
+            },"json");
+            //这里需要给服务器端传入定区id
+            $.post("decidedzoneAction_getAllHasAsso",{"id":e[0].id},function (data) {
+                for(var i = 0; i < data.length; i++) {
+                    //得到的data是含有customer的json数组
+                    var id = data[i].id;
+                    var name = data[i].name;
+                    var telephone = data[i].telephone;
+                    name = name+" (" + telephone + ")";
+                    $("#associationSelect").append("<option value="+id+">"+name+"</option>")
+                }
+
+            },"json");
+		}
+		else {
+		    $.messager.alert("warning","please just choose one row","warning");
+		}
 	}
 	
 	//工具栏
@@ -352,7 +386,7 @@
 	<!-- 关联客户窗口 -->
 	<div class="easyui-window" title="关联客户窗口" id="customerWindow" collapsible="false" closed="true" minimizable="false" maximizable="false" style="top:20px;left:200px;width: 400px;height: 300px;">
 		<div style="overflow:auto;padding:5px;" border="false">
-			<form id="customerForm" action="${pageContext.request.contextPath }/decidedzone_assigncustomerstodecidedzone.action" method="post">
+			<form id="customerForm" action="${pageContext.request.contextPath }/decidedzoneAction_saveCustomer" method="post">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="3">关联客户</td>
@@ -360,14 +394,37 @@
 					<tr>
 						<td>
 							<input type="hidden" name="id" id="customerDecidedZoneId" />
-							<select id="noassociationSelect" multiple="multiple" size="10"></select>
+							<span>NoneAssociated Customer</span>
+							<select style="height: 150px; width: 130px" id="noassociationSelect" multiple="multiple" size="10"></select>
 						</td>
 						<td>
 							<input type="button" value="》》" id="toRight"><br/>
 							<input type="button" value="《《" id="toLeft">
+							<script type="text/javascript">
+								$(function () {
+									$("#toRight").click(function () {
+									    $("#associationSelect").append($("#noassociationSelect option:selected"));
+                                    })
+                                    $("#toLeft").click(function () {
+                                        $("#noassociationSelect").append($("#associationSelect option:selected"));
+                                    })
+									$("#associationBtn").click(function () {
+                                        //问题1：如果不选中框中的元素会无法提交
+										//需要手动将右边表格元素内容变成选中
+										//只需提交右边即可,所以noassociationSelect中的name属性并没有定义，这样submit的时候就不会提交
+										$("#associationSelect option").attr("selected","selected");
+										//问题2：id没有赋值
+                                        var e = $("#grid").datagrid("getSelections");
+                                        $("#customerDecidedZoneId").attr("value",e[0].id);
+                                        $("#customerForm").submit();
+                                    })
+                                })
+							</script>
 						</td>
 						<td>
-							<select id="associationSelect" name="customerIds" multiple="multiple" size="10"></select>
+							<p>Associated</p>
+							<p>Customer</p>
+							<select style="height: 150px; width: 130px" id="associationSelect" name="customerIds" multiple="multiple" size="10"></select>
 						</td>
 					</tr>
 					<tr>
