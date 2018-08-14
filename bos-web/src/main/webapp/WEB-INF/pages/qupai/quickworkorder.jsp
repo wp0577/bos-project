@@ -28,7 +28,7 @@
 	type="text/javascript"></script>
 <script type="text/javascript">
 	var editIndex ;
-	
+	//add a new row
 	function doAdd(){
 		if(editIndex != undefined){
 			$("#grid").datagrid('endEdit',editIndex);
@@ -43,11 +43,11 @@
 			editIndex = 0;
 		}
 	}
-	
+	//save row
 	function doSave(){
 		$("#grid").datagrid('endEdit',editIndex );
 	}
-	
+	//cancel edit
 	function doCancel(){
 		if(editIndex!=undefined){
 			$("#grid").datagrid('cancelEdit',editIndex);
@@ -164,6 +164,14 @@
 			onDblClickRow : doDblClickRow,
 			onAfterEdit : function(rowIndex, rowData, changes){
 				console.info(rowData);
+				//第二个参数是一个json对象，所以平时我们是{""：""}这种方式去添加数据
+				//或者可以直接传一个json对象进去
+				$.post("workorderAction_save",rowData,function (data) {
+					if(data == "0") {
+					    $.messager.alert("warning","save workOrder failed","warning");
+					}
+					else $.messager.info("warning","save workOrder successd","info");
+                })
 				editIndex = undefined;
 			}
 		});

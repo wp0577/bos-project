@@ -28,17 +28,6 @@ public interface ICustomerService {
 
     /**
      * 
-     * @return
-     *     returns java.util.List<com.wp.service.Customer>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getAllNotAssociation", targetNamespace = "http://service.wp.com/", className = "com.wp.service.GetAllNotAssociation")
-    @ResponseWrapper(localName = "getAllNotAssociationResponse", targetNamespace = "http://service.wp.com/", className = "com.wp.service.GetAllNotAssociationResponse")
-    public List<Customer> getAllNotAssociation();
-
-    /**
-     * 
      * @param arg0
      * @return
      *     returns java.util.List<com.wp.service.Customer>
@@ -75,5 +64,44 @@ public interface ICustomerService {
                     String arg0,
             @WebParam(name = "arg1", targetNamespace = "")
                     List<Integer> arg1);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<com.wp.service.Customer>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getAllNotAssociation", targetNamespace = "http://service.wp.com/", className = "com.wp.service.GetAllNotAssociation")
+    @ResponseWrapper(localName = "getAllNotAssociationResponse", targetNamespace = "http://service.wp.com/", className = "com.wp.service.GetAllNotAssociationResponse")
+    public List<Customer> getAllNotAssociation();
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getDecidedIdbyAddress", targetNamespace = "http://service.wp.com/", className = "com.wp.service.GetDecidedIdbyAddress")
+    @ResponseWrapper(localName = "getDecidedIdbyAddressResponse", targetNamespace = "http://service.wp.com/", className = "com.wp.service.GetDecidedIdbyAddressResponse")
+    public String getDecidedIdbyAddress(
+            @WebParam(name = "arg0", targetNamespace = "")
+                    String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns com.wp.service.Customer
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getCustomerByTelephone", targetNamespace = "http://service.wp.com/", className = "com.wp.service.GetCustomerByTelephone")
+    @ResponseWrapper(localName = "getCustomerByTelephoneResponse", targetNamespace = "http://service.wp.com/", className = "com.wp.service.GetCustomerByTelephoneResponse")
+    public Customer getCustomerByTelephone(
+            @WebParam(name = "arg0", targetNamespace = "")
+                    String arg0);
 
 }

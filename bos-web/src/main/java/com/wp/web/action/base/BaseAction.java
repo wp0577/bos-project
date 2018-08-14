@@ -3,6 +3,7 @@ package com.wp.web.action.base;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.wp.utils.PageBean;
+import com.wp.utils.crm.Customer;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
@@ -60,6 +61,18 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
         JsonConfig jsonConfig = new JsonConfig();
         jsonConfig.setExcludes(excludes);
         String jsonObject = JSONArray.fromObject(list,jsonConfig).toString();
+        ServletActionContext.getResponse().setContentType("text/json;charset=utf-8");
+        try {
+            ServletActionContext.getResponse().getWriter().write(jsonObject);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void String2Json(Object o, String[] excludes) {
+        JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.setExcludes(excludes);
+        String jsonObject = JSONObject.fromObject(o,jsonConfig).toString();
         ServletActionContext.getResponse().setContentType("text/json;charset=utf-8");
         try {
             ServletActionContext.getResponse().getWriter().write(jsonObject);
