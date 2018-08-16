@@ -18,4 +18,14 @@ public class UserDaoImp extends IBaseDaoImp<User> implements IUserDao {
         }
         return null;
     }
+
+    @Override
+    public User getUserByName(String username) {
+        String hql = "from User u where u.username = ?";
+        List<User> list = (List<User>) getHibernateTemplate().find(hql, username);
+        if(list!=null && list.size()>0) {
+            return list.get(0);
+        }
+        return null;
+    }
 }

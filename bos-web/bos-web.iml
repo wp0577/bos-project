@@ -49,8 +49,8 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="module" module-name="bos-service" />
     <orderEntry type="module" module-name="bos-dao" />
-    <orderEntry type="module" module-name="bos-util" />
     <orderEntry type="module" module-name="bos-domain" />
+    <orderEntry type="module" module-name="bos-util" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:4.2.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:4.2.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />

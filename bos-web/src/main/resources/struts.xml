@@ -32,10 +32,7 @@
             <result type="dispatcher">/WEB-INF/pages/{1}/{2}.jsp</result>
         </action>
         <action name="userAction_*" class="userAction" method="{1}">
-            <result name="success" type="redirectAction">
-                <param name="actionName">page_common_index</param>
-                <param name="namespace">/</param>
-            </result>
+            <result name="success">/index.jsp</result>
         </action>
         <action name="staffAction_*" class="staffAction" method="{1}">
             <result name="list">/WEB-INF/pages/base/staff.jsp</result>

@@ -71,4 +71,28 @@
 
 	<jaxws:client id="crmClient" address="http://localhost:8080/service/customer" serviceClass="com.wp.utils.crm.ICustomerService"></jaxws:client>
 
+	<!--注入apache shiro-->
+	<bean class="org.apache.shiro.spring.web.ShiroFilterFactoryBean" id="shiroFilter">
+		<property name="securityManager" ref="securityManager"></property>
+		<property name="loginUrl" value="/login.jsp"></property>
+		<property name="successUrl" value="/index.jsp"></property>
+		<property name="unauthorizedUrl" value="/unauthorize.jsp"></property>
+		<property name="filterChainDefinitions">
+			<value>
+				/css/** = anon
+				/js/** = anon
+				/images/** = anon
+				/validatecode.jsp* = anon
+				/login.jsp = anon
+				/userAction_login = anon
+				/page_base_staff.action = perms["staff-list"]
+				/* = authc
+			</value>
+		</property>
+	</bean>
+	<bean class="org.apache.shiro.web.mgt.DefaultWebSecurityManager" id="securityManager">
+		<property name="realm" ref="bosRealm"></property>
+	</bean>
+	<bean class="com.wp.service.realm.BosRealm" id="bosRealm"></bean>
+
 </beans>

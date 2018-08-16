@@ -6,4 +6,5 @@ public interface IUserDao extends IBaseDao<User>{
 
     public User getUserByNameAndPassword(String username, String password);
 
+    User getUserByName(String username);
 }

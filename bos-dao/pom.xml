@@ -13,10 +13,14 @@
     <dependencies>
         <dependency>
             <groupId>com.wp</groupId>
+            <artifactId>bos-domain</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wp</groupId>
             <artifactId>bos-util</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
     </dependencies>
 
 

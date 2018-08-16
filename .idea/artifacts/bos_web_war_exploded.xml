@@ -13,11 +13,11 @@
           <element id="archive" name="bos-dao-1.0-SNAPSHOT.jar">
             <element id="module-output" name="bos-dao" />
           </element>
-          <element id="archive" name="bos-util-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="bos-util" />
-          </element>
           <element id="archive" name="bos-domain-1.0-SNAPSHOT.jar">
             <element id="module-output" name="bos-domain" />
+          </element>
+          <element id="archive" name="bos-util-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="bos-util" />
           </element>
           <element id="library" level="project" name="Maven: org.springframework:spring-context:4.2.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.2.4.RELEASE" />
