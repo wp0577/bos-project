@@ -95,4 +95,9 @@
 	</bean>
 	<bean class="com.wp.service.realm.BosRealm" id="bosRealm"></bean>
 
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" id="advisorAutoProxyCreator">
+		<property name="proxyTargetClass" value="true"></property>
+	</bean>
+
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor"></bean>
 </beans>

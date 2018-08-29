@@ -30,7 +30,13 @@
 	$(function(){
 		// 点击保存
 		$('#save').click(function(){
-			location.href='${pageContext.request.contextPath}/page_admin_function.action';
+		    //first we should validate form
+			var e = $('#functionForm').form("validate");
+			if(e) {
+                $('#functionForm').submit();
+                //location.href='${pageContext.request.contextPath}/page_admin_function.action';
+
+            }
 		});
 	});
 </script>	
@@ -42,15 +48,16 @@
 	</div>
 </div>
 <div data-options="region:'center'">
-	<form id="functionForm" method="post">
+	<form id="functionForm" method="post" action="functionAction_save">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">功能权限信息</td>
 					</tr>
 					<tr>
-						<td width="200">编号</td>
+						<%--we should autogenerate ID--%>
+						<td width="200">关键字</td>
 						<td>
-							<input type="text" name="id" class="easyui-validatebox" data-options="required:true" />						
+							<input type="text" name="code" class="easyui-validatebox" data-options="required:true" />
 						</td>
 					</tr>
 					<tr>
@@ -79,7 +86,8 @@
 					<tr>
 						<td>父功能点</td>
 						<td>
-							<input name="parentFunction.id" class="easyui-combobox" data-options="valueField:'id',textField:'info',url:''"/>
+							<%--get function data by ajax request--%>
+							<input name="parentFunction.id" class="easyui-combobox" data-options="valueField:'id',textField:'name',url:'functionAction_listAjax'"/>
 						</td>
 					</tr>
 					<tr>

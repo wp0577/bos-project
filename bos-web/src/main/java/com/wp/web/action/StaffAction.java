@@ -3,6 +3,7 @@ package com.wp.web.action;
 import com.wp.domain.Staff;
 import com.wp.service.IStaffService;
 import com.wp.web.action.base.BaseAction;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,7 @@ public class StaffAction extends BaseAction<Staff> {
         return "list";
     }
 
+    @RequiresPermissions("staff-delete")
     public String deleteById() {
         iStaffService.deleteByID(ids);
         return "list";
