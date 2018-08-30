@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -30,7 +31,9 @@
 	$(function(){
 		$("body").css({visibility:"visible"});
 		$('#save').click(function(){
-			$('#form').submit();
+		    if($('#form').form("validate")) {
+                $('#form').submit();
+            }
 		});
 	});
 </script>	
@@ -42,7 +45,7 @@
 		</div>
 	</div>
     <div region="center" style="overflow:auto;padding:5px;" border="false">
-       <form id="form" method="post" >
+       <form id="form" method="post" action="userAction_add" >
            <table class="table-edit"  width="95%" align="center">
            		<tr class="title"><td colspan="4">基本信息</td></tr>
 	           	<tr><td>用户名:</td><td><input type="text" name="username" id="username" class="easyui-validatebox" required="true" /></td>
@@ -74,6 +77,21 @@
 					</td>
 				</tr>
 	           	<tr><td>备注:</td><td colspan="3"><textarea style="width:80%"></textarea></td></tr>
+
+			   	<tr><td>角色:</td><td colspan="3" id="roleTd">
+					<script type="text/javascript">
+						$(function () {
+							$.post("roleAction_getAll",function(data){
+							    for(var i = 0; i<data.length; i++)
+                                {
+                                    var id = data[i].id;
+                                    var name = data[i].name;
+                                    $("#roleTd").append("<input type='checkbox' name='roleIds' value="+id+" id="+ id +"><label for="+id+">"+name+"</label>")
+                                }
+							})
+                        })
+					</script>
+				</td></tr>
            </table>
        </form>
 	</div>

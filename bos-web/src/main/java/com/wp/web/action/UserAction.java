@@ -29,9 +29,23 @@ public class UserAction extends BaseAction<User> {
     @Autowired
     private ICustomerService iCustomerService;
 
-    private String checkcode;
     @Autowired
     private IUserService userService;
+
+    private String checkcode;
+
+    private String[] roleIds;
+
+    public String add() {
+        userService.add(model, roleIds);
+        return "list";
+    }
+
+    public String pageQuery() {
+        userService.pageQuery(pageBean);
+        String2Json(pageBean, new String[]{"noticebills","roles"});
+        return NONE;
+    }
 
     public String login() {
         String key = (String) ServletActionContext.getRequest().getSession().getAttribute("key");
@@ -53,7 +67,6 @@ public class UserAction extends BaseAction<User> {
             return LOGIN;
         }
     }
-
     public String editPassword() {
         //用下面的方法会将user整个更新一遍，我们可以只更新其中password字段
         /*User user = BosUtil.getUserFromSession();
@@ -104,4 +117,10 @@ public class UserAction extends BaseAction<User> {
     public void setCheckcode(String checkcode) {
         this.checkcode = checkcode;
     }
+
+
+    public void setRoleIds(String[] roleIds) {
+        this.roleIds = roleIds;
+    }
+
 }
