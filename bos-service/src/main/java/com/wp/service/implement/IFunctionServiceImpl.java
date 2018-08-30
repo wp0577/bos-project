@@ -3,6 +3,7 @@ package com.wp.service.implement;
 import com.wp.dao.IFunctionDao;
 import com.wp.domain.Function;
 import com.wp.service.IFunctionService;
+import com.wp.utils.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,5 +38,10 @@ public class IFunctionServiceImpl implements IFunctionService {
             model.setParentFunction(null);
         }
         iFunctionDao.save(model);
+    }
+
+    @Override
+    public void pageQuery(PageBean pageBean) {
+        iFunctionDao.getPage(pageBean);
     }
 }

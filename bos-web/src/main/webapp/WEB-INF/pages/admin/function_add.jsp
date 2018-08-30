@@ -87,7 +87,12 @@
 						<td>父功能点</td>
 						<td>
 							<%--get function data by ajax request--%>
-							<input name="parentFunction.id" class="easyui-combobox" data-options="valueField:'id',textField:'name',url:'functionAction_listAjax'"/>
+							<%--<input name="parentFunction.id" class="easyui-combobox"
+							data-options="valueField:'id',textField:'name',url:'functionAction_listAjax'"/>--%>
+
+						<input name="parentFunction.id" class="easyui-combotree"
+					   	data-options="url:'functionAction_listAjax'"
+							   style="width:170px;"/>
 						</td>
 					</tr>
 					<tr>

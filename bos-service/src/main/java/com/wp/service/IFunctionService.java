@@ -1,6 +1,7 @@
 package com.wp.service;
 
 import com.wp.domain.Function;
+import com.wp.utils.PageBean;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface IFunctionService{
     List<Function> getList();
 
     void save(Function model);
+
+    void pageQuery(PageBean pageBean);
 }
