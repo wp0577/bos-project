@@ -30,4 +30,17 @@ public class IFunctionDaoImpl extends IBaseDaoImp<Function> implements IFunction
         String hql = "select distinct f from Function f left join f.roles r left join r.users u where u.id = ?";
         return (List<Function>) getHibernateTemplate().find(hql, id);
     }
+
+    @Override
+    public List<Function> getAllMenu() {
+        String hql = "from Function f where f.generatemenu = '1'";
+        List<Function> list = (List<Function>) getHibernateTemplate().find(hql);
+        return list;
+    }
+
+    @Override
+    public List<Function> getMenuByUserId(String id) {
+        String hql = "select distinct f from Function f left join f.roles r left join r.users u where u.id = ? and f.generatemenu = '1'";
+        return (List<Function>) getHibernateTemplate().find(hql, id);
+    }
 }

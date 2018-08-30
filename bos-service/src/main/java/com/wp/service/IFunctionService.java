@@ -1,6 +1,7 @@
 package com.wp.service;
 
 import com.wp.domain.Function;
+import com.wp.domain.User;
 import com.wp.utils.PageBean;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface IFunctionService{
     void save(Function model);
 
     void pageQuery(PageBean pageBean);
+
+    List<Function> getMenu(User user);
 }

@@ -2,12 +2,14 @@ package com.wp.service.implement;
 
 import com.wp.dao.IFunctionDao;
 import com.wp.domain.Function;
+import com.wp.domain.User;
 import com.wp.service.IFunctionService;
 import com.wp.utils.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,5 +45,18 @@ public class IFunctionServiceImpl implements IFunctionService {
     @Override
     public void pageQuery(PageBean pageBean) {
         iFunctionDao.getPage(pageBean);
+    }
+
+    @Override
+    public List<Function> getMenu(User user) {
+        List<Function> list = new ArrayList<>();
+        //check whether user is admin and return all function
+        if(user.getUsername().equals("admin")) {
+            list = iFunctionDao.getAllMenu();
+        }
+        else {
+            list = iFunctionDao.getMenuByUserId(user.getId());
+        }
+        return list;
     }
 }

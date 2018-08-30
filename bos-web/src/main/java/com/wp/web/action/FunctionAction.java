@@ -1,7 +1,9 @@
 package com.wp.web.action;
 
 import com.wp.domain.Function;
+import com.wp.domain.User;
 import com.wp.service.IFunctionService;
+import com.wp.utils.BosUtil;
 import com.wp.web.action.base.BaseAction;
 import org.apache.struts2.components.If;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,20 @@ public class FunctionAction extends BaseAction<Function> {
         String2Json(list, new String[]{"parentFunction", "roles"});
         return NONE;
 
+    }
+
+    /**
+    * @Description:  find menu by user permission
+    * @Param:  null
+    * @return:  NONE
+    * @Author: Pan wu
+    * @Date: 8/30/18
+    */
+    public String getMenu() {
+        User user = BosUtil.getUserFromSession();
+        List<Function> list = iFunctionService.getMenu(user);
+        String2Json(list, new String[]{"roles","children","parentFunction"});
+        return NONE;
     }
 
     public String pageQuery() {
