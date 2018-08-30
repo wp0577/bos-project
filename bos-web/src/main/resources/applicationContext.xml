@@ -92,8 +92,14 @@
 	</bean>
 	<bean class="org.apache.shiro.web.mgt.DefaultWebSecurityManager" id="securityManager">
 		<property name="realm" ref="bosRealm"></property>
+		<property name="cacheManager" ref="ehCacheManager"></property>
 	</bean>
 	<bean class="com.wp.service.realm.BosRealm" id="bosRealm"></bean>
+
+	<!--insert cache manager-->
+	<bean name="ehCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManagerConfigFile" value="classpath:ehcache.xml"></property>
+	</bean>
 
 	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" id="advisorAutoProxyCreator">
 		<property name="proxyTargetClass" value="true"></property>
