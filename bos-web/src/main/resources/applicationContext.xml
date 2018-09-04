@@ -109,38 +109,38 @@
 
 
 	<!--                                定时任务和邮箱注入                            -->
-	<bean id="myJob" class="com.wp.service.mailJobs.MailJob">
+	<!--<bean id="myJob" class="com.wp.service.mailJobs.MailJob">
 		<property name="username" value="wupan0577@gmail.com"/>
 		<property name="password" value="wupan8201123891"/>
 		<property name="smtpServer" value="smtp.gmail.com"/>
 	</bean>
 
-	<!-- 配置jobDetail -->
+	&lt;!&ndash; 配置jobDetail &ndash;&gt;
 	<bean id="myJobDetail"
 		  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<!-- 用到的Job实例 -->
+		&lt;!&ndash; 用到的Job实例 &ndash;&gt;
 		<property name="targetObject">
 			<ref bean="myJob" />
 		</property>
-		<!-- Job实例中的方法 -->
+		&lt;!&ndash; Job实例中的方法 &ndash;&gt;
 		<property name="targetMethod">
 			<value>execute</value>
 		</property>
 	</bean>
 
-	<!-- 配置触发器Trigger -->
+	&lt;!&ndash; 配置触发器Trigger &ndash;&gt;
 	<bean id="myTrigger"
 		  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail">
 			<ref bean="myJobDetail" />
 		</property>
 		<property name="cronExpression">
-			<!-- 每5秒执行一次 -->
-			<value>0/30 * * * * ?</value>
+			&lt;!&ndash; 每5秒执行一次&ndash;&gt;
+			<value>* * 23 * * ?</value>
 		</property>
 	</bean>
 
-	<!-- 配置scheduler工厂 -->
+	&lt;!&ndash; 配置scheduler工厂 &ndash;&gt;
 	<bean id="scheduler"
 		  class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
@@ -148,6 +148,6 @@
 				<ref bean="myTrigger" />
 			</list>
 		</property>
-	</bean>
+	</bean>-->
 	<!--*****************************                      *******************************-->
 </beans>

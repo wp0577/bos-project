@@ -12,4 +12,6 @@ public interface ISubareaService<Subarea> {
     List<Subarea> getAll();
 
     List<Subarea> getAllNotAssoc();
+
+    List<Object> showHighCharts();
 }

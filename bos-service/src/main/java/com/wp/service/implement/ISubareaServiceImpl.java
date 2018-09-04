@@ -37,6 +37,11 @@ public class ISubareaServiceImpl implements ISubareaService<Subarea> {
     }
 
     @Override
+    public List<Object> showHighCharts() {
+        return iSubareaDao.showHighCharts();
+    }
+
+    @Override
     public List<Subarea> getAll() {
         return iSubareaDao.getAll();
     }

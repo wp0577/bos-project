@@ -29,6 +29,22 @@ public class SubAreaAction extends BaseAction<Subarea> {
     @Autowired
     private ISubareaService iSubareaService;
 
+
+    /**
+     * @Description: show how many subarea in a district
+     * @Param: []
+     * @return: java.lang.String
+     * @Author: Pan wu
+     * @Date: 9/2/18
+     */
+    public String showHighChart() {
+        //return list<Object> because result will be shown like [beijing : 2]
+        List<Object> list = iSubareaService.showHighCharts();
+        String2Json(list, new String[]{});
+        return NONE;
+    }
+
+
     /*返回所以未被定区关联过的分区列表*/
     public String listAjax() {
         List<Subarea> list = iSubareaService.getAllNotAssoc();

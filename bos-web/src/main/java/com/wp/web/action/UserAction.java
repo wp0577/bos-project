@@ -1,5 +1,6 @@
 package com.wp.web.action;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.wp.domain.User;
 import com.wp.service.IUserService;
 import com.wp.utils.BosUtil;
@@ -15,12 +16,14 @@ import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 import java.security.Key;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @Scope("prototype")
@@ -35,6 +38,17 @@ public class UserAction extends BaseAction<User> {
     private String checkcode;
 
     private String[] roleIds;
+
+    public String countNumber() {
+        Object number = ServletActionContext.getServletContext().getAttribute("number");
+        try {
+            ServletActionContext.getResponse().getWriter().write(String.valueOf(number));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("user number = " +  number);
+        return NONE;
+    }
 
     public String add() {
         userService.add(model, roleIds);

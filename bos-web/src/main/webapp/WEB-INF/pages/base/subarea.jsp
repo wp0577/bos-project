@@ -26,6 +26,9 @@
 <script
 	src="${pageContext.request.contextPath }/js/easyui/locale/easyui-lang-zh_CN.js"
 	type="text/javascript"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script type="text/javascript">
 	function doAdd(){
 		$('#addSubareaWindow').window("open");
@@ -82,7 +85,13 @@
 		text : '导出',
 		iconCls : 'icon-undo',
 		handler : doExport
-	}];
+	},
+		{
+		id : 'button-showHighChart',
+		text : '展示分区图',
+		iconCls : 'icon-search',
+		handler : doShowHighChart
+		}];
 	// 定义列
 	var columns = [ [ {
 		field : 'id',
@@ -187,6 +196,16 @@
 	        height: 400,
 	        resizable:false
 	    });
+		//分区展示页面
+        $('#showHighChartWindow').window({
+            title: '分区展示图',
+            width: 800,
+            modal: true,
+            shadow: true,
+            closed: true,
+            height: 550,
+            resizable:false
+        });
 		//直接将form中的值转成json对象
         $.fn.serializeJson=function(){
             var serializeObj={};
@@ -218,6 +237,45 @@
 	function doDblClickRow(){
 		alert("双击表格数据...");
 	}
+
+	function doShowHighChart() {
+        $('#showHighChartWindow').window("open");
+        $.post("subAreaAction_showHighChart",function (data) {
+            Highcharts.chart('container', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Subarea distribute status, 2018'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Brands',
+                    colorByPoint: true,
+                    data: data
+                }]
+            });
+        })
+    }
+
 </script>	
 </head>
 <body class="easyui-layout" style="visibility:hidden;">
@@ -314,6 +372,12 @@
 					</tr>
 				</table>
 			</form>
+		</div>
+	</div>
+
+	<%--展示分区图--%>
+	<div class="easyui-window" title="分区展示图" id="showHighChartWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
+		<div id="container" style="padding-top: 50px" border="false">
 		</div>
 	</div>
 </body>

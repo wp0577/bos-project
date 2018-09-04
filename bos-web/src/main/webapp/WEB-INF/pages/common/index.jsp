@@ -176,7 +176,7 @@
 	}
 	// 版权信息
 	function showAbout(){
-		$.messager.alert("宅急送 v1.0","管理员邮箱: zqx@itcast.cn");
+		$.messager.alert("Pan Wu","管理员邮箱: wupan0577@gmail.com");
 	}
 </script>
 </head>
@@ -235,11 +235,21 @@
 				<tr>
 					<td style="width: 300px;">
 						<div style="color: #999; font-size: 8pt;">
-							传智播客 | Powered by <a href="http://www.itcast.cn/">itcast.cn</a>
+							Pan Wu | Powered by <a href="http://panwu.xin">panwu.xin</a>
 						</div>
 					</td>
 					<td style="width: *;" class="co1"><span id="online"
-						style="background: url(${pageContext.request.contextPath }/images/online.png) no-repeat left;padding-left:18px;margin-left:3px;font-size:8pt;color:#005590;">在线人数:1</span>
+						style="background: url(${pageContext.request.contextPath }/images/online.png) no-repeat left;padding-left:18px;margin-left:3px;font-size:8pt;color:#005590;">***</span>
+						<script type="text/javascript">
+							$(function () {
+							    $.post("userAction_countNumber",function (data) {
+									$("#online").text("Current Online: "+ data);
+                                })
+							    /*var e = $("#online");
+							    e.text("llala");
+								alert(e.text())*/
+                            })
+						</script>
 					</td>
 				</tr>
 			</tbody>
