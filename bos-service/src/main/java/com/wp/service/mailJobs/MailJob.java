@@ -15,6 +15,7 @@ import javax.mail.internet.MimeMessage;
 import com.wp.dao.IWorkBillDao;
 import com.wp.domain.Workbill;
 
+
 /**
  * 发送邮件的作业
  * @author wp
@@ -45,11 +46,11 @@ public class MailJob {
 		this.password = password;
 	}
 
-	public void execute() {
+	public void execute(List<?> list) {
 		System.out.println("要发邮件了。。。");
 		try {
 			//查询工单类型为新单的所有工单
-			List<Workbill> list = workBillDao.getAll();
+			//List<Workbill> list = workBillDao.getAll();
 			if(null != list && list.size() > 0){
 				final Properties mailProps = new Properties();
 				mailProps.put("mail.smtp.host", this.getSmtpServer());
@@ -70,7 +71,7 @@ public class MailJob {
 				};
 				// 使用环境属性和授权信息，创建邮件会话
 				Session mailSession = Session.getInstance(mailProps, authenticator);
-				for(Workbill workbill : list){
+				for(Object object : list){
 					// 创建邮件消息
 					MimeMessage message = new MimeMessage(mailSession);
 					// 设置发件人
@@ -82,7 +83,7 @@ public class MailJob {
 					// 设置邮件标题
 					message.setSubject("系统邮件：新单通知");
 					// 设置邮件的内容体
-					message.setContent(workbill.toString(), "text/html;charset=UTF-8");
+					message.setContent(object.toString(), "text/html;charset=UTF-8");
 					// 发送邮件
 					Transport.send(message);
 				}

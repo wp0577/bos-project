@@ -43,8 +43,8 @@
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
-				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.format_sql">false</prop>
 			</props>
 		</property>
 		<!-- 注入hibernate的映射文件 -->
@@ -64,12 +64,14 @@
 	<context:component-scan base-package="com.wp"/>
 
 	<!--注入cxf service服务-->
+	<!--放到远程服务器后的地址应该为http://localhost:8080/包名/service/customer-->
+	<jaxws:client id="crmClient" address="http://localhost:8080/service/customer" serviceClass="com.wp.utils.crm.ICustomerService"></jaxws:client>
+
 	<!-- 支持spring注解 -->
 	<context:annotation-config/>
 
 	<tx:annotation-driven/>
 
-	<jaxws:client id="crmClient" address="http://localhost:8080/service/customer" serviceClass="com.wp.utils.crm.ICustomerService"></jaxws:client>
 
 	<!--注入apache shiro-->
 	<bean class="org.apache.shiro.spring.web.ShiroFilterFactoryBean" id="shiroFilter">
@@ -109,12 +111,12 @@
 
 
 	<!--                                定时任务和邮箱注入                            -->
-	<!--<bean id="myJob" class="com.wp.service.mailJobs.MailJob">
+	<bean id="myJob" class="com.wp.service.mailJobs.MailJob">
 		<property name="username" value="wupan0577@gmail.com"/>
 		<property name="password" value="wupan8201123891"/>
 		<property name="smtpServer" value="smtp.gmail.com"/>
 	</bean>
-
+	<!--
 	&lt;!&ndash; 配置jobDetail &ndash;&gt;
 	<bean id="myJobDetail"
 		  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">

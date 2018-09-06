@@ -27,15 +27,15 @@ public class SessionCountListener implements HttpSessionListener {
         List<LoginInfo> userList = (List<LoginInfo>) se.getSession().getServletContext().getAttribute("userList");
 */
         //设置session失效时间，为调试用
+        //se.getSession().setMaxInactiveInterval(60*1);
 
-        se.getSession().setMaxInactiveInterval(60*2);
         ArrayList<LoginInfo> userList = (ArrayList<LoginInfo>) se.getSession().getServletContext().getAttribute("userList");
-        for (LoginInfo loginInfo:userList) {
+/*        for (LoginInfo loginInfo:userList) {
             System.out.println("siez = "+ userList.size());
             System.out.println("id = "+loginInfo.getSessionIdString());
             System.out.println("ip = "+loginInfo.getIpString());
-        }
-        if(SessionUtil.getUserBySessionId(userList, se.getSession().getId())==null) {
+        }*/
+        if(userList==null || SessionUtil.getUserBySessionId(userList, se.getSession().getId())==null) {
             number++;
         }
         //在线用户的数量存储到域对象ServletContext的number中
@@ -49,10 +49,13 @@ public class SessionCountListener implements HttpSessionListener {
         ArrayList<LoginInfo> list=
                 (ArrayList<LoginInfo>) se.getSession().getServletContext().getAttribute("userList");
         //根据list去删session中的number
-        if(list!=null || list.size()>0) number=(number<=0)?0:number-1;
-        se.getSession().getServletContext().setAttribute("number", number);
+        //if(list!=null || list.size()>0) number=(number<=0)?0:number-1;
+        //se.getSession().getServletContext().setAttribute("number", number);
         //根据sessionid删除将要推出的用户信息
-        SessionUtil.remove(list,se.getSession().getId());
+        if(SessionUtil.remove(list,se.getSession().getId())){
+            number=number>0?number-1:0;
+            se.getSession().getServletContext().setAttribute("number", number);
+        }
         se.getSession().getServletContext().setAttribute("userList", list);
         System.out.println("after = "+ number);
     }

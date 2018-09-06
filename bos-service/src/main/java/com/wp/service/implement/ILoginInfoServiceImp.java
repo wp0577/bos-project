@@ -31,4 +31,9 @@ public class ILoginInfoServiceImp implements ILoginInfoService {
         if (byCriterial.size()==0) return null;
         return byCriterial.get(0);
     }
+
+    @Override
+    public String getLoginTotal() {
+        return iLoginInfoDao.getTotalCount();
+    }
 }

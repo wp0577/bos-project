@@ -182,7 +182,7 @@
 </head>
 <body class="easyui-layout">
 	<div data-options="region:'north',border:false"
-		style="height:80px;padding:10px;background:url('./images/header_bg.png') no-repeat right;">
+		style="height:80px;padding:10px;background:url('./images/header_bg.png') no-repeat right; background-size: cover">
 		<div id="sessionInfoDiv"
 			style="position: absolute;right: 5px;top:10px;">
 			[<strong><s:property value="#session.user.username"></s:property></strong>]，欢迎你！
@@ -229,17 +229,17 @@
 		</div>
 	</div>
 	<div data-options="region:'south',border:false"
-		style="height:50px;padding:10px;background:url('./images/header_bg.png') no-repeat right;">
+		style="height:50px;padding:10px;background:url('./images/header_bg.png') no-repeat right;background-size: cover">
 		<table style="width: 100%;">
 			<tbody>
 				<tr>
 					<td style="width: 300px;">
-						<div style="color: #999; font-size: 8pt;">
+						<div style="position: absolute;left:10px;color: #999; font-size: 8pt;">
 							Pan Wu | Powered by <a href="http://panwu.xin">panwu.xin</a>
 						</div>
 					</td>
 					<td style="width: *;" class="co1"><span id="online"
-						style="background: url(${pageContext.request.contextPath }/images/online.png) no-repeat left;padding-left:18px;margin-left:3px;font-size:8pt;color:#005590;">***</span>
+						style="position: absolute;left:200px; background: url(${pageContext.request.contextPath }/images/online.png) no-repeat left;padding-left:18px;margin-left:3px;font-size:8pt;color:#005590;">***</span>
 						<script type="text/javascript">
 							$(function () {
 							    $.post("userAction_countNumber",function (data) {
@@ -248,6 +248,19 @@
 							    /*var e = $("#online");
 							    e.text("llala");
 								alert(e.text())*/
+                            })
+						</script>
+					</td>
+					<td style="width: *;" class="co1">
+						<span id="total" style="height: auto;position: absolute;left:330px ;background: url(${pageContext.request.contextPath }/images/online.png) no-repeat left;padding-left:18px;margin-left:3px;font-size:8pt;color:#005590;">Total Visit：</span>
+						<script type="text/javascript">
+                            $(function () {
+                                $.post("userAction_getLoginTotal",function (data) {
+                                    $("#total").text("Total Visit: "+ data);
+                                })
+                                /*var e = $("#online");
+                                e.text("llala");
+                                alert(e.text())*/
                             })
 						</script>
 					</td>

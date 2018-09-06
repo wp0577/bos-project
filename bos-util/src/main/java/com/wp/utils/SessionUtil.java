@@ -22,12 +22,16 @@ public class SessionUtil {
     /*
      * 根据sessionID删除用户
      */
-    public static void remove(ArrayList<LoginInfo> list,String id) {
+    public static boolean remove(ArrayList<LoginInfo> list,String id) {
+        //用作判断是否有sessionId被查到并删除
+        boolean flag = false;
         for(int i=0;i<list.size();i++){
             if(list.get(i).getSessionIdString().equals(id)){
                 list.remove(list.get(i));
+                flag = true;
             }
         }
+        return flag;
     }
 
     /**

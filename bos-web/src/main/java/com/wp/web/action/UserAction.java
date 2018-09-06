@@ -2,7 +2,9 @@ package com.wp.web.action;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.wp.domain.User;
+import com.wp.service.ILoginInfoService;
 import com.wp.service.IUserService;
+import com.wp.service.mailJobs.MailJob;
 import com.wp.utils.BosUtil;
 import com.wp.utils.MD5加密.MD5Utils;
 import com.wp.utils.crm.Customer;
@@ -22,6 +24,7 @@ import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 import java.security.Key;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,14 +34,38 @@ public class UserAction extends BaseAction<User> {
 
     @Autowired
     private ICustomerService iCustomerService;
-
     @Autowired
     private IUserService userService;
+    @Autowired
+    private ILoginInfoService iLoginInfoService;
+    @Autowired
+    private MailJob mailJob;
+
+    public void setBug_c(String bug_c) {
+        this.bug_c = bug_c;
+    }
+
+    private String bug_c;
 
     private String checkcode;
 
     private String[] roleIds;
 
+    //submit bug message by email
+    public String sumbitBug() {
+        String s = "bug提醒："+bug_c;
+        List<String> list = new ArrayList();
+        list.add(s);
+        mailJob.execute(list);
+        try {
+            ServletActionContext.getResponse().getWriter().write("success");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return NONE;
+    }
+
+    //count current online no
     public String countNumber() {
         Object number = ServletActionContext.getServletContext().getAttribute("number");
         try {
@@ -47,6 +74,16 @@ public class UserAction extends BaseAction<User> {
             e.printStackTrace();
         }
         System.out.println("user number = " +  number);
+        return NONE;
+    }
+
+    public String getLoginTotal() {
+        String total = iLoginInfoService.getLoginTotal();
+        try {
+            ServletActionContext.getResponse().getWriter().write(total);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return NONE;
     }
 

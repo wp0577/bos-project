@@ -9,4 +9,5 @@ import com.wp.domain.LoginInfo;
  * @create: 2018-09-04 01:23
  **/
 public interface ILoginInfoDao extends IBaseDao<LoginInfo>{
+    String getTotalCount();
 }

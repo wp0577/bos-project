@@ -97,8 +97,7 @@ input[type=password] {
 			</div>
 		</div>
 	</div>
-	<div
-		style="width: 900px; height: 50px; position: absolute; text-align: left; left: 50%; top: 50%; margin-left: -450px;; margin-top: 220px;">
+	<div style="width: 900px; height: 50px; position: absolute; text-align: left; left: 50%; top: 50%; margin-left: -450px;; margin-top: 220px;">
 		<span style="color: #488ED5;">Powered By www.panwu.xin</span><span
 			style="color: #488ED5;margin-left:10px;">此网页仅作为项目演示之用
 		</span>

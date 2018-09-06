@@ -21,7 +21,7 @@
                 <interceptor-ref name="defaultStack"></interceptor-ref>
             </interceptor-stack>
         </interceptors>
-        <default-interceptor-ref name="myStack"></default-interceptor-ref>
+        <default-interceptor-ref name="myStack"/>
 
         <!--设置全局result变量，这样不止action返回的结果会被查询，其他类返回的也会-->
         <global-results>
@@ -29,7 +29,7 @@
             <result name="unauth">/unauthorize.jsp</result>
         </global-results>
         <global-exception-mappings>
-            <exception-mapping exception="org.apache.shiro.authz.UnauthorizedException" result="unauth"></exception-mapping>
+            <exception-mapping exception="org.apache.shiro.authz.UnauthorizedException" result="unauth"/>
         </global-exception-mappings>
         
         <!-- 需要进行权限控制的页面访问, 即为了方便web-info下面的页面跳转-->
@@ -54,7 +54,7 @@
         <action name="noticeBillAction_*" class="noticeBillAction" method="{1}">
             <result name="list">/WEB-INF/pages/qupai/noticebill_add.jsp</result>
         </action>
-        <action name="workorderAction_*" class="workorderAction" method="{1}"></action>
+        <action name="workorderAction_*" class="workorderAction" method="{1}"/>
         <action name="functionAction_*" class="functionAction" method="{1}">
             <result name="list">/WEB-INF/pages/admin/function.jsp</result>
         </action>
